@@ -1,24 +1,26 @@
 package com.github.zk.sockjswebsocket.configuration;
 
-import com.github.zk.sockjswebsocket.handler.MyHandler;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.*;
 
 /**
  * @author zk
  * @date 2019/6/17 16:17
  */
 @Configuration
-public class WebsocketConfig implements WebSocketConfigurer {
+@EnableWebSocketMessageBroker
+public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(myHandler(),"/websocket")
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/websocket")
+                .setAllowedOrigins("*")
                 .withSockJS();
     }
-    @Bean
-    public MyHandler myHandler() {
-        return new MyHandler();
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.setApplicationDestinationPrefixes("/app");
+        registry.enableSimpleBroker("/topic","/queue");
     }
 }
