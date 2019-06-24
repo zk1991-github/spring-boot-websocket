@@ -8,6 +8,7 @@
         <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>pom</packaging>
     <groupId>com.github.zk</groupId>
     <artifactId>spring-boot-websocket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
