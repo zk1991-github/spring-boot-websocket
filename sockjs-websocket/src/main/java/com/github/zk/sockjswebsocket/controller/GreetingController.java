@@ -53,6 +53,7 @@ public class GreetingController {
 
     /**
      * 模拟登陆，发送给指定用户的必要条件
+     * 注意localhost和本机IP访问不是同一个Session
      * @param request
      * @param userName
      * @return
